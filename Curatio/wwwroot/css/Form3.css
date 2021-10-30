@@ -1,0 +1,12 @@
+﻿.showCard {
+    display: none;
+}
+@media screen and (max-width: 883px) {
+    .showTable {
+        display: none !important;
+    }
+
+    .showCard {
+        display: flex;
+    }
+}

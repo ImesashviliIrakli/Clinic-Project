@@ -1,0 +1,31 @@
+﻿
+.padding-div{
+    padding-top: 100px;
+}
+.padding-text{
+    padding-top:0px;
+}
+.p-color {
+    color: #E2E2E2;
+}
+#welcome-div {
+    margin-top: 60px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: rgba(70, 143, 175, .7);
+    border-radius: 25px;
+}
+@media only screen and (max-width: 767px) {
+    .padding-div {
+        padding-top: 20px;
+    }
+    .padding-text {
+        padding-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 262px) {
+   .img-width{
+       width:85%;
+   }
+}

@@ -1,0 +1,61 @@
+﻿@model Form3
+
+    <style>
+        body {
+            background-color: #014F86 !important;
+        }
+        .text-color {
+            color: white;
+        }
+        .details-card {
+            height: 230px;
+        }
+    </style>
+
+    <div class="container">
+
+        <h3 class="text-color animated fadeIn">@Model.Company</h3>
+        <div class="row justify-content-end ">
+            <a asp-controller="Form3" asp-action="Form3List" class="btn btn-secondary col-sm-1 mb-3">List</a>
+        </div>
+
+        <div class="animated fadeIn row justify-content-center">
+            <div class="col-8 col-md-4 m-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Doctors Info</h5>
+                        <p class="card-text"><strong>Doctors Name: </strong>@Model.DoctorName</p>
+                        <p class="card-text"><strong>Doctors Email: </strong>@Model.DoctorEmail</p>
+                        <p class="card-text"<strong>Doctors Phone: </strong>@Model.DoctorPhone</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card col-8 col-md-6 m-3">
+                <div class="card-body">
+                    <h5 class="card-title">Patient info:</h5>
+                    <p class="card-text">@Model.FullName</p>
+                    <p class="card-text">@Model.PrivateId</p>
+                    <p class="card-text">
+                        <strong>Transport: </strong> 
+                        @if (Model.Transport)
+                        {
+                            <span>Yes</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+                    </p>
+                    <p class="card-text"><strong>Email: </strong>@Model.Email</p>
+                    <p class="card-text"><strong>Phone: </strong>@Model.Phone</p>
+                    <p class="card-text"><strong>Address: </strong>@Model.Address</p>
+                    <p class="card-text"><strong>Researches: </strong>@Model.Researches</p>
+                    <p class="card-text"><strong>Comment: </strong>@Model.Comment</p>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>

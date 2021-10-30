@@ -1,0 +1,120 @@
+﻿@model Form3ListViewModel
+
+    <style>
+        body {
+            background-color: #014F86 !important;
+        }
+        input {
+            outline: inherit;
+            outline-color: silver !important;
+        }
+        label {
+            color: white;
+        }
+    </style>
+
+    <div class="container animated fadeIn">
+        <form id="Form3" action="@Url.Action("Form3List", "Form3")" method="get">
+            <div class="form-group">
+                <div class="row justify-content-center justify-content-sm-start">
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label class="" for="id">Id: </label>
+                        <input type="number" name="id" class="form-control" />
+                    </div>
+
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label class="" for="Company">Company: </label>
+                        <input type="text" name="Company" class="form-control" />
+                    </div>
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label for="DoctorName">DoctorName: </label>
+                        <input type="text" name="DoctorName" class="form-control" />
+                    </div>
+
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label for="Date">Date: </label>
+                        <input type="datetime-local" name="Date" class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center justify-content-sm-start">
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label for="FullName">FullName: </label>
+                        <input type="text" name="FullName" class="form-control" />
+                    </div>
+
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label for="Province">Province: </label>
+                        <input type="text" name="Province" class="form-control" />
+                    </div>
+
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <label for="PrivateId">PrivateId: </label>
+                        <input type="text" name="PrivateId" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="row justify-content-center justify-content-sm-start">
+                    <div class="d-flex flex-column col-4 col-lg-2 m-1">
+                        <button type="submit" class="btn btn-secondary mt-3"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+
+
+        <div class="row justify-content-md-end">
+            <a asp-controller="Form3" asp-action="Form3Add" class="btn btn-success col-2 m-3">Add</a>
+
+            <table class="table showTable">
+                <thead class="font-size table-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">FullName</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Province</th>
+                        <th scope="col">DoctorName</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">PrivateId</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                @foreach (var form3 in Model.Form3s)
+                {
+                    <partial name="Form3Partial/_Form3List" model="form3" />
+                }
+            </table>
+        </div>
+        <div>
+            @foreach (var form3 in Model.Form3s)
+            {
+                <partial name="Form3Partial/_Form3ListCard" model="form3" />
+            }
+        </div>
+
+        <a class="btn btn-success mt-3" href="@Url.Action("ExportToExcel","Form3")">Export To Excel</a>
+
+    </div>
+
+<script>
+
+
+    (function () {
+        var $form = $('#Form3');
+        var form3Id = $form.find("input[name=id]").val();
+
+        var data = $form.serialize();
+        var url = $form.attr('action');
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            data: data
+        });
+    });
+</script>

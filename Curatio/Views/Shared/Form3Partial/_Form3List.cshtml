@@ -1,0 +1,20 @@
+﻿@model Form3
+
+    <tbody>
+        <tr class="font-size table-secondary">
+            <td>@Model.Id</td>
+            <td>@Model.FullName</td>
+            <td>@Model.Company</td>
+            <td>@Model.Province</td>
+            <td>@Model.DoctorName</td>
+            <td>@Model.Phone</td>
+            <td>@Model.PrivateId</td>
+            <td><a asp-controller="Form3" asp-action="Form3Details" asp-route-id="@Model.Id" class="btn btn-sm btn-primary bi-info-circle-fill"></a></td>
+            <td><a asp-controller="Form3" asp-action="Form3Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning bi bi-pencil-square"></a></td>
+            <td>
+                <form asp-controller="Form3" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger bi bi-trash" onclick="return confirm('Are you sure you want to delete Form3: @Model.Id')"></button>
+                </form>
+            </td>
+        </tr>
+    </tbody>

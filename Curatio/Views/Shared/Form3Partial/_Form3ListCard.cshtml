@@ -1,0 +1,44 @@
+﻿@model Form3
+
+<style>
+    .center-card {
+        margin: auto;
+    }
+</style>
+
+<div class="card mt-3 showCard center-card" style="width: 22rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FullName</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.PrivateId</h6>
+        <div class="card-text">
+            <p class="card-text">
+                <strong>Transport: </strong> 
+                @if (Model.Transport)
+                {
+                    <span>Yes</span>
+                }
+                else
+                {
+                    <span>No</span>
+                }
+            </p>
+            <p><strong>Doctors Name: </strong>@Model.DoctorName</p>
+            <p><strong>Doctors Email: </strong>@Model.DoctorEmail</p>
+            <p><strong>Doctors Phone: </strong>@Model.DoctorPhone</p>
+        </div>
+        <div class="row">
+            <div class="d-flex flex-column col-3 m-1">
+                <label class="text-dark">Details: </label>
+                <a asp-controller="Form3" asp-action="Form3Details" asp-route-id="@Model.Id" class="btn btn-primary"></a>
+            </div>
+            <div class="d-flex flex-column col-3 m-1">
+                <label class="text-dark">Edit: </label>
+                <a asp-controller="Form3" asp-action="Form3Edit" asp-route-id="@Model.Id" class="btn btn-warning"></a>
+            </div>
+            <div class="d-flex flex-column col-3 m-1">
+                <label class="text-dark">Delete: </label>
+                <button asp-controller="Form3" asp-action="Delete" asp-route-id="@Model.Id" type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete Form3: @Model.Id')"></button>
+            </div>
+        </div>
+    </div>
+</div>

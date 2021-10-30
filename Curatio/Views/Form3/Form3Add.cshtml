@@ -1,0 +1,124 @@
+﻿
+<style>
+    body {
+        background-color: #014F86 !important;
+    }
+</style>
+
+<form asp-action="Add" asp-controller="Form3" method="post">
+    <div class="container">
+        <div class="card animated fadeIn">
+
+            <div class="card-header row justify-content-center">
+                <h1>ფორმა 3</h1>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-8 col-lg-4">
+                    <label for="company">ონლაინ კლინიკა/სადაზღვევო კომპანია:  </label>
+                    <input class="form-control" type="text" name="Company" id="company" placeholder="Company" />
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <label>ოჯახის ექიმი</label>
+                    <input class="form-control" type="text" name="DoctorName" placeholder="DoctorName" />
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-8 col-lg-4">
+                    <label>ოჯახის ექიმის მეილი</label>
+                    <input class="form-control" type="text" name="DoctorEmail" placeholder="Email" />
+                </div>
+                <div class="col-8 col-lg-4">
+                    <label>ოჯახის ექიმის ტელეფონი</label>
+                    <input class="form-control" type="text" name="DoctorPhone" placeholder="Phone" />
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-8 col-lg-4">
+                    <label>პაციენტის სახელი და გვარი</label>
+                    <input class="form-control" type="text" name="FullName" placeholder="FullName" />
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <label>კვლევის ჩატარების თარიღი</label>
+                    <input class="form-control" type="date" name="DateOfResearch" />
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-8 col-lg-4">
+                    <label>პაციენტის მეილი/ტელეფონი</label>
+                    <input class="form-control" type="text" name="Email" placeholder="Email" />
+                    <input class="form-control" type="text" name="Phone" placeholder="Phone" />
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <label>პაციენტი</label>
+                    <input class="form-control" type="text" name="Address" placeholder="Address" />
+                    <input class="form-control" type="text" name="Province" placeholder="Province" />
+
+                </div>
+
+            </div>
+
+            <div class="row justify-content-center">
+
+                <div class="col-8 col-lg-4">
+                    <label>პაციენტის პირადი ნომერი</label>
+                    <input class="form-control" type="text" name="PrivateId" placeholder="PrivateId" />
+                </div>
+
+                <div class="col-8 col-lg-4 d-flex flex-column">
+                    <label>ტრანსპორტირება</label>
+                    <input class="" type="checkbox" name="Transport"/>
+                </div>
+
+            </div>
+            
+            <div class="row justify-content-center">
+
+                <div class="col-8 col-lg-4">
+                    <label>დანიშნული კვლევები</label>
+                    <textarea class="form-control" type="text" name="Researches" placeholder="Researches:"></textarea>
+                </div>
+
+                <div class="col-8 col-lg-4">
+                    <label>კომენტარი</label>
+                    <textarea class="form-control" type="text" name="Comment" placeholder="Comment:"></textarea>
+                </div>
+
+            </div>
+            
+            <br />
+
+            <div class="card-footer">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </div>
+
+                    <div class="col-3">
+                        <a asp-controller="Form3" asp-action="Form3List" class="btn btn-secondary">List</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+
+
+</form>
+
+
+
+
