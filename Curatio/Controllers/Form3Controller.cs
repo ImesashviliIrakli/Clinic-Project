@@ -1,4 +1,5 @@
-﻿using ClosedXML.Excel;
+﻿using AutoMapper;
+using ClosedXML.Excel;
 using Curatio.Data;
 using Curatio.Models.Form3;
 using Curatio.Repository;
@@ -19,49 +20,45 @@ namespace Curatio.Controllers
 {
     public class Form3Controller : Controller
     {
+        #region DependencyInjection
+
         private readonly AppDbContext _context;
         private readonly IFormThree _formThreeRepo;
+        private readonly IMapper _mapper;
 
-        public Form3Controller(AppDbContext context, IFormThree formThreeRepo)
+        public Form3Controller(
+            AppDbContext context,
+            IFormThree formThreeRepo,
+            IMapper mapper
+            )
         {
             _context = context;
             _formThreeRepo = formThreeRepo;
+            _mapper = mapper;
         }
+        #endregion
 
-        public IActionResult Form3Add()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Add(Form3 body)
-        {
-            _context.FormThree.Add(body);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Form3List");
-        }
-
+        #region GetFormThrees
         [HttpGet]
         public ViewResult Form3List(FilterForm3 body)
         {
             var allForm3s = _formThreeRepo.GetAllForm3s();
-            if(body.Id == null && body.Company == null && body.DoctorName == null && body.Date == null && body.FullName == null && body.Province == null && body.PrivateId == null)
-            {
-                body = null;
-            }
 
-            if(body != null)
+            if (body == null)
+            {
+                return View(new Form3ListViewModel { Form3s = allForm3s });
+
+            }
+            else
             {
                 var filtered = _formThreeRepo.FilteredForm3s(body);
                 return View(new Form3ListViewModel { Form3s = filtered });
             }
-
-            return View(new Form3ListViewModel { Form3s = allForm3s });
-
         }
+        #endregion
 
-        [HttpGet]
+        #region FormThreeDetails
+
         public IActionResult Form3Details(int id)
         {
             var details = _context.FormThree.FirstOrDefault(d => d.Id == id);
@@ -72,38 +69,62 @@ namespace Curatio.Controllers
 
             return View(details);
         }
+        #endregion
 
-        [HttpGet]
+        #region AddFormThree
+        public IActionResult Form3Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Form3ForCreation body)
+        {
+            var formThreeEntity = _mapper.Map<Form3>(body);
+            _formThreeRepo.CreateFormThree(formThreeEntity);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Form3List");
+        }
+        #endregion
+
+        #region UpdateFormThree
         public IActionResult Form3Edit(int id)
         {
-            var details = _context.FormThree.FirstOrDefault(d => d.Id == id);
-            if (details == null)
+            var info = _context.FormThree.FirstOrDefault(d => d.Id == id);
+            if (info == null)
             {
                 return NotFound();
             }
 
-            return View(details);
+            return View(info);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Form3 body)
+        public async Task<IActionResult> Edit(int id, Form3ForUpdate body)
         {
+            var formThreeEntity = _mapper.Map<Form3>(body);
+            formThreeEntity.Id = id;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            var getFormById = _context.FormThree.Any(d => d.Id == formThreeEntity.Id);
+            if (!getFormById)
             {
                 return BadRequest();
             }
 
-            _context.Entry(body).State = EntityState.Modified;
+            _formThreeRepo.UpdateFormThree(formThreeEntity);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Form3List");
         }
+        #endregion
 
+        #region DeleteFormThree
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -123,6 +144,9 @@ namespace Curatio.Controllers
 
             return RedirectToAction("Form3List");
         }
+        #endregion
+
+        #region ExportToExcel
 
         public IActionResult ExportToExcel()
         {
@@ -182,8 +206,7 @@ namespace Curatio.Controllers
                 }
 
             }
-
-
         }
+        #endregion
     }
 }

@@ -9,8 +9,10 @@ namespace Curatio.Repository
     public interface IFormThree
     {
         IEnumerable<Form3> GetAllForm3s();
-        IEnumerable<Form3> FilteredForm3s(int formId);
-        IEnumerable<Form3> FilteredForm3s(FilterForm3 body);
         Form3 GetFormThreeById(int formId);
+        void CreateFormThree(Form3 body);
+        void UpdateFormThree(Form3 body);
+        IEnumerable<Form3> FilteredForm3(int formId);
+        IEnumerable<Form3> FilteredForm3s(FilterForm3 body);
     }
 }
